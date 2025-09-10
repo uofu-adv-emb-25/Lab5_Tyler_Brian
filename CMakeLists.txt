@@ -7,23 +7,32 @@ endif()
 set(sdkVersion 2.0.0)
 set(toolchainVersion 13_2_Rel1)
 set(picotoolVersion 2.0.0)
-if(EXISTS ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-    include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-elseif(DEFINED ENV{PICO_SDK_PATH})
+if (DEFINED PICO_SDK_PATH)
+# Already defined, e.g. -D flag
+elseif (DEFINED ENV{PICO_SDK_PATH})
+# Defined in an environment variable
     set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
 else()
+# Use the submodule
     set(PICO_SDK_PATH lib/pico-sdk)
 endif()
 
-if(DEFINED ENV{FREERTOS_PATH})
+if (DEFINED FREERTOS_PATH)
+# Already defined, e.g. -D flag
+elseif(DEFINED ENV{FREERTOS_PATH})
+# Defined in an environment variable
     set(FREERTOS_PATH $ENV{FREERTOS_PATH})
 else()
+# Default use the submodule.
     set(FREERTOS_PATH lib/freertos)
 endif()
-
-if(DEFINED ENV{UNITY_PATH})
+if (DEFINED UNITY_PATH)
+# Already defined, e.g. -D flag
+elseif(DEFINED ENV{UNITY_PATH})
+# Defined in an environment variable
     set(UNITY_PATH $ENV{UNITY_PATH})
 else()
+# Default to the submodule
     set(UNITY_PATH lib/unity)
 endif()
 
