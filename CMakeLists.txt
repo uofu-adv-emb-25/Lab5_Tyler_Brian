@@ -36,6 +36,10 @@ else()
     set(UNITY_PATH lib/unity)
 endif()
 
+if(DEFINED ENV{OPENOCD_PATH})
+    set(OPENOCD_PATH $ENV{OPENOCD_PATH})
+endif()
+
 # ====================================================================================
 cmake_minimum_required(VERSION 3.13)
 

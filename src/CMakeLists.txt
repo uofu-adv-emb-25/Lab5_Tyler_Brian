@@ -31,4 +31,9 @@ endif()
 # Another pico macro which generates the uf2 file in addition to the elf
 pico_add_extra_outputs(hello_freertos)
 
-add_custom_target(flash picotool load -f $<TARGET_FILE:hello_freertos> DEPENDS hello_freertos)
+find_program(OPENOCD openocd)
+find_program(PICOTOOL picotool)
+
+add_custom_target(flash ${PICOTOOL} load -f $<TARGET_FILE:hello_freertos> DEPENDS hello_freertos)
+
+add_custom_target(openocd_flash ${OPENOCD} -s ${OPENOCD_PATH} -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c 'adapter speed 5000; program "$<TARGET_FILE:hello_freertos>" verify reset exit' DEPENDS hello_freertos)
