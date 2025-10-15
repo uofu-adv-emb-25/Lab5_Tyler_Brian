@@ -1,10 +1,43 @@
-# Renode setup
-The Raspberry Pico needs configuration files for Renode to work properly.
+# Tyler and Brian Lab 5 Measurements and Calculations
 
-* On MacOS, the installation location is `/Applications/Renode.app/Contents/MacOs`
-* On Linux, the location for Debian, Fedora, and Arch is `/opt/renode`
-* On Windows, the location is `C://Program Files/Renode`
+# sleep.c  
+Statistics:
+T = 199.9988 ms
+f = 5.00002 Hz
+d_c = 50%
 
-To add the Pico configuration files:
-1. Copy `rp2040_spinlock.py` and `rp2040_divider.py` to the `scripts/pydev` directory of your Renode installation.
-1. Copy `rpi_pico_rp2040_w.repl` to the `platforms/cpus` directory.
+Jitter = 199.9988 ms - 200 ms = -1.2 microseconds
+
+there are an expected 18000 200ms-periods in one hour
+18000 cycles/hr * 199.9988 ms/cycle = 3599978.4 ms/hr
+3600000 (expected) - 3599978.4 (measured) = 21.6 ms
+
+Calculated Drift over 1 hour period = 0.108 cycles = 21.6 ms faster than expected with a 5Hz clk
+This means that our timing method completes and extra 0.108 cycles in a 1-hour duration of time
+
+
+# timer.c  
+Statistics:
+T = 199.9988 ms
+f = 5.00002 Hz
+d_c = 50%
+
+Jitter = 199.9988 ms - 200 ms = -1.2 microseconds
+
+Calculated Drift over 1 hour period = 0.108 cycles = 21.6 ms faster than expected with a 5Hz clk
+This means that our timing method completes and extra 0.108 cycles in a 1-hour duration of time
+
+
+# task_delay.c
+Statistics:
+T = 199.9988 ms
+f = 5.00002 Hz
+d_c = 50%
+
+Jitter = 199.9988 ms - 200 ms = -1.2 microseconds
+
+Calculated Drift over 1 hour period = 0.108 cycles = 21.6 ms faster than expected with a 5Hz clk
+This means that our timing method completes and extra 0.108 cycles in a 1-hour duration of time
+
+
+
