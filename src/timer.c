@@ -9,9 +9,9 @@ bool timer_callback(__unused struct repeating_timer *t)
 
     gpio_put(OUT_PIN, toggle);
     for (size_t i = 0; i < 100000; i++)
-        {
-            __nop();
-        }
+    {
+        __nop();
+    }
     
     return true;
 }
